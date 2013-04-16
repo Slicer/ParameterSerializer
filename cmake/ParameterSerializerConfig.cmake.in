@@ -6,6 +6,15 @@
 
 set( ParameterSerializer_FOUND 1 )
 
+get_filename_component( config_dir "${CMAKE_CURRENT_LIST_FILE}" PATH )
+
 set( ParameterSerializer_INCLUDE_DIRS "@ParameterSerializer_INCLUDE_DIRS@" )
 
+find_package( JsonCpp QUIET )
+if( JsonCpp_FOUND )
+  include( "${JsonCpp_DIR}/JsonCppTargets.cmake" )
+else()
+  include( "@JsonCpp_DIR@/JsonCppTargets.cmake" )
+endif()
+include( "${config_dir}/ParameterSerializerTargets.cmake" )
 set( ParameterSerializer_LIBRARIES "@ParameterSerializer_LIBRARIES@" )
