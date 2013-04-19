@@ -35,7 +35,7 @@ namespace itk
  *
  * \sa ParameterValue
  * */
-class FloatValue: public ParameterValue
+class ITK_EXPORT FloatValue: public ParameterValue
 {
 public:
   FloatValue()

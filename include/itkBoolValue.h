@@ -35,7 +35,7 @@ namespace itk
  *
  * \sa ParameterValue
  * */
-class BoolValue: public ParameterValue
+class ITK_EXPORT BoolValue: public ParameterValue
 {
 public:
   BoolValue()

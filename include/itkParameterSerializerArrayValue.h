@@ -35,7 +35,7 @@ namespace itk
  *
  * \sa ParameterValue
  * */
-class ParameterSerializerArrayValue: public ParameterValue
+class ITK_EXPORT ParameterSerializerArrayValue: public ParameterValue
 {
 public:
   typedef std::vector< ParameterSerializer * > ParameterSerializerArrayType;

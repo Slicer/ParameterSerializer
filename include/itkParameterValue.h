@@ -42,7 +42,7 @@ namespace itk
  * \sa ParameterArchiver
  *
  * */
-class ParameterValue
+class ITK_EXPORT ParameterValue
 {
 public:
   /** Types of parameter values. A restricted set of simple types are available so

@@ -35,7 +35,7 @@ namespace itk
  *
  * \sa ParameterValue
  * */
-class StringArrayValue: public ParameterValue
+class ITK_EXPORT StringArrayValue: public ParameterValue
 {
 public:
   typedef std::vector< std::string > StringArrayType;

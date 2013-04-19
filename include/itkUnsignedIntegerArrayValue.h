@@ -37,7 +37,7 @@ namespace itk
  *
  * \sa ParameterValue
  * */
-class UnsignedIntegerArrayValue: public ParameterValue
+class ITK_EXPORT UnsignedIntegerArrayValue: public ParameterValue
 {
 public:
   typedef itk::uint64_t UIntType;
