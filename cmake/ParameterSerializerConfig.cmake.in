@@ -6,6 +6,17 @@
 
 set( ParameterSerializer_FOUND 1 )
 
+get_filename_component( ParameterSerializer_CMAKE_DIR "${CMAKE_CURRENT_LIST_FILE}" PATH )
+
 set( ParameterSerializer_INCLUDE_DIRS "@ParameterSerializer_INCLUDE_DIRS@" )
 
+# We need to let CMake know the location of the json library.
+set( used_JsonCpp_config "@JsonCpp_DIR@/JsonCppConfig.cmake" )
+if( NOT DEFINED JsonCpp_LIBRARIES AND EXISTS "${used_JsonCpp_config}" )
+  include( "${used_JsonCpp_config}" )
+endif()
+if( NOT ParameterSerializer_TARGETS_IMPORTED AND NOT ParameterSerializer_BINARY_DIR )
+  set( ParameterSerializer_TARGETS_IMPORTED 1 )
+  include( "${ParameterSerializer_CMAKE_DIR}/ParameterSerializerTargets.cmake" )
+endif()
 set( ParameterSerializer_LIBRARIES "@ParameterSerializer_LIBRARIES@" )
