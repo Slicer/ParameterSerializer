@@ -8,6 +8,9 @@ macro( add_subdirectory_if_module_enabled _dir )
   endif()
 endmacro()
 
+if( WIN32 )
+  add_definitions( -D_CRT_SECURE_NO_WARNINGS )
+endif()
 # Create source code, compile and link a test driver
 # Two variables must be defined before including this file.
 #   KIT should define a unique name for the test driver.
