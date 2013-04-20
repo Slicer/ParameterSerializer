@@ -28,6 +28,7 @@ limitations under the License.
 
 #include "itkParameterArchiver.h"
 #include "itkParameterValue.h"
+#include "ParameterSerializerExport.h"
 
 namespace itk
 {
@@ -58,7 +59,7 @@ namespace itk
  *
  * \sa ParameterArchiver
  */
-class ITK_EXPORT ParameterSerializer: public Object
+class ParameterSerializer_EXPORT ParameterSerializer: public Object
 {
 public:
   /** Standard class typedefs. */

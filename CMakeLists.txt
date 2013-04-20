@@ -1,4 +1,4 @@
-cmake_minimum_required( VERSION 2.8 )
+cmake_minimum_required( VERSION 2.8.6 )
 
 project( ParameterSerializer )
 
@@ -21,7 +21,7 @@ endif()
 
 
 # These will be populated by the subdirectory CMakeLists.txt.
-set( ${PROJECT_NAME}_BUILD_INCLUDE_DIRS "" CACHE INTERNAL
+set( ${PROJECT_NAME}_BUILD_INCLUDE_DIRS "${${PROJECT_NAME}_BINARY_DIR}/include" CACHE INTERNAL
   "Build directories with project headers.")
 set( ${PROJECT_NAME}_LIBRARIES "" CACHE INTERNAL
   "Project libraries" )

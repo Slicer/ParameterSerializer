@@ -26,6 +26,7 @@ limitations under the License.
 #include "itkObjectFactory.h"
 
 #include "itkParameterArchiver.h"
+#include "ParameterSerializerExport.h"
 
 #include "json/json.h"
 
@@ -38,7 +39,7 @@ namespace itk
  * \brief Serializes parameters to a JsonCpp object.
  *
  * */
-class ITK_EXPORT JsonCppArchiver: public ParameterArchiver
+class ParameterSerializer_EXPORT JsonCppArchiver: public ParameterArchiver
 {
 public:
   /** Standard class typedefs. */
