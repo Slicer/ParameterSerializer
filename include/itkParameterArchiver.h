@@ -37,6 +37,7 @@ limitations under the License.
 #include "itkStringArrayValue.h"
 #include "itkUnsignedIntegerValue.h"
 #include "itkUnsignedIntegerArrayValue.h"
+#include "ParameterSerializerExport.h"
 
 namespace itk
 {
@@ -70,7 +71,7 @@ class UnsignedIntegerArrayValue;
  * and deflate the ParameterSerializer::ParameterValue classes.
  *
  */
-class ITK_EXPORT ParameterArchiver: public Object
+class ParameterSerializer_EXPORT ParameterArchiver: public Object
 {
 public:
   /** Standard class typedefs. */
