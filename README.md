@@ -7,7 +7,7 @@ Serialization is an important technique when exploring an analysis parameter
 solution space and performing reproducible research.
 
 This is a set of classes to perform [serialization](http://en.wikipedia.org/wiki/Serialization)
-and deserialization of the parameters of [InsightTK](http://itk.org) classes, i.e.,
+and deserialization of the parameters of [ITK](http://itk.org) classes, i.e.,
 classes that inherit from ```itk::LightObject```. Serialization does not require
 code instrumentation of the target classes.  The parameters of the target class
 are serialized with an archiver; the only currently implemented archiver writes
