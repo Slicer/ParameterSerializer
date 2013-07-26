@@ -27,6 +27,14 @@ limitations under the License.
 
 #include <fstream>
 
+#ifndef itkAssertInDebugAndIgnoreInReleaseMacro
+#ifndef NDEBUG
+#define itkAssertInDebugAndIgnoreInReleaseMacro(X) assert(X)
+#else
+#define itkAssertInDebugAndIgnoreInReleaseMacro(X)
+#endif
+#endif
+
 namespace itk
 {
 

@@ -1,12 +1,14 @@
-cmake_minimum_required( VERSION 2.8.6 )
+cmake_minimum_required( VERSION 2.8.7 )
 
 project( ParameterSerializer )
+
+set( CMAKE_MODULE_PATH ${${PROJECT_NAME}_SOURCE_DIR}/cmake ${CMAKE_MODULE_PATH} )
 
 find_package( ITK REQUIRED )
 include( ${ITK_USE_FILE} )
 
 find_package( JsonCpp REQUIRED )
-include_directories( ${JsonCpp_INCLUDE_DIRS} )
+include_directories( ${JsonCpp_INCLUDE_DIR} )
 
 
 if( NOT CMAKE_RUNTIME_OUTPUT_DIRECTORY )
