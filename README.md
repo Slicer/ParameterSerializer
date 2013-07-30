@@ -1,7 +1,7 @@
-ParameterSerializer
-===================
+TubeTK ParameterSerializer
+==========================
 
-[![Build Status](https://travis-ci.org/TubeTK/ParameterSerializer.png?branch=master)](https://travis-ci.org/TubeTK/ParameterSerializer)
+[![Build Status](https://travis-ci.org/TubeTK/TubeTK-ParameterSerializer.png?branch=master)](https://travis-ci.org/TubeTK/TubeTK-ParameterSerializer)
 
 Serialization is an important technique when exploring an analysis parameter
 solution space and performing reproducible research.
