@@ -1,7 +1,7 @@
 # For build tree configuration.
 set( ${PROJECT_NAME}_INCLUDE_DIRS ${${PROJECT_NAME}_BUILD_INCLUDE_DIRS} )
 list( APPEND ${PROJECT_NAME}_INCLUDE_DIRS
-  ${JsonCpp_INCLUDE_DIR}
+  ${JsonCpp_INCLUDE_DIRS}
   ${ITK_INCLUDE_DIRS}
   )
 export( TARGETS ${${PROJECT_NAME}_LIBRARY}

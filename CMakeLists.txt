@@ -8,7 +8,7 @@ find_package( ITK REQUIRED )
 include( ${ITK_USE_FILE} )
 
 find_package( JsonCpp REQUIRED )
-include_directories( ${JsonCpp_INCLUDE_DIR} )
+include_directories( ${JsonCpp_INCLUDE_DIRS} )
 
 
 if( NOT CMAKE_RUNTIME_OUTPUT_DIRECTORY )
