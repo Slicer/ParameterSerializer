@@ -35,7 +35,7 @@ namespace itk
  *
  * \sa ParameterValue
  * */
-class ITK_EXPORT DoubleValue: public ParameterValue
+class DoubleValue: public ParameterValue
 {
 public:
   DoubleValue()

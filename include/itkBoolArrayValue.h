@@ -37,7 +37,7 @@ namespace itk
  *
  * \sa ParameterValue
  * */
-class ITK_EXPORT BoolArrayValue: public ParameterValue
+class BoolArrayValue: public ParameterValue
 {
 public:
   typedef std::vector< bool > BoolArrayType;

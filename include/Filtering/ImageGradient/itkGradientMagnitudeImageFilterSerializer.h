@@ -36,7 +36,7 @@ namespace itk
  *
  */
 template< class TGradientMagnitudeImageFilter >
-class ITK_EXPORT GradientMagnitudeImageFilterSerializer:
+class GradientMagnitudeImageFilterSerializer:
   public ImageToImageFilterSerializer
     < typename TGradientMagnitudeImageFilter::Superclass >
 {

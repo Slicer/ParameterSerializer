@@ -8,4 +8,4 @@ CreateTestDriver( ImageGradientSerializer "${${PROJECT_NAME}_LIBRARIES}"
 add_test( NAME itkGradientMagnitudeRecursiveGaussianImageFilterSerializerTest
   COMMAND ImageGradientSerializerTestDriver
   itkGradientMagnitudeRecursiveGaussianImageFilterSerializerTest
-  ${TEMP}/itkGradientMagnitudeRecursiveGaussianImageFilterSerializerTest )
+  ${TEMP}/itkGradientMagnitudeRecursiveGaussianImageFilterSerializerTest.json )

@@ -36,7 +36,7 @@ namespace itk
  *
  * \sa ParameterValue
  * */
-class ITK_EXPORT ParameterSerializerValue: public ParameterValue
+class ParameterSerializerValue: public ParameterValue
 {
 public:
   ParameterSerializerValue()

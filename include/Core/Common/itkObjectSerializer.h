@@ -20,61 +20,57 @@ See the License for the specific language governing permissions and
 limitations under the License.
 
 =========================================================================*/
-#ifndef __itkInPlaceImageFilterSerializer_h
-#define __itkInPlaceImageFilterSerializer_h
+#ifndef __itkObjectSerializer_h
+#define __itkObjectSerializer_h
 
-#include "itkImageToImageFilterSerializer.h"
+#include "itkObjectFactory.h"
+
+#include "itkBoolValue.h"
+#include "itkStringValue.h"
+#include "itkParameterSerializer.h"
 
 namespace itk
 {
 
-/** \class InPlaceImageFilterSerializer
+/** \class ObjectSerializer
  *
- * \brief Parameter serializer for InPlaceImageFilter.
+ * \brief Parameter serializer for Object.
  *
- * \sa ParameterSerializer
+ * \sa Object
  *
  */
-template< class TInPlaceImageFilter >
-class InPlaceImageFilterSerializer:
-  public ImageToImageFilterSerializer< typename TInPlaceImageFilter::Superclass >
+class ObjectSerializer:
+  public ParameterSerializer
 {
 public:
   /** Standard class typedefs. */
-  typedef InPlaceImageFilterSerializer  Self;
-  typedef ImageToImageFilterSerializer
-    < typename TInPlaceImageFilter::Superclass >
-                                                        Superclass;
-  typedef SmartPointer< Self >                          Pointer;
-  typedef SmartPointer< const Self >                    ConstPointer;
+  typedef ObjectSerializer           Self;
+  typedef ParameterSerializer        Superclass;
+  typedef SmartPointer< Self >       Pointer;
+  typedef SmartPointer< const Self > ConstPointer;
 
   /** Method for creation through the object factory. */
   itkNewMacro( Self );
 
   /** Run-time type information (and related methods). */
-  itkTypeMacro( InPlaceImageFilterSerializer,
-    ImageToImageFilterSerializer );
-
-  typedef TInPlaceImageFilter InPlaceImageFilterType;
+  itkTypeMacro( ObjectSerializer, ParameterSerializer );
 
   virtual void Serialize();
   virtual void DeSerialize();
 
 protected:
-  InPlaceImageFilterSerializer();
-  virtual ~InPlaceImageFilterSerializer();
+  ObjectSerializer();
+  virtual ~ObjectSerializer();
 
-  BoolValue * m_InPlace;
+  BoolValue *   m_Debug;
+  // TODO: Enable when using ITK 4.5
+  StringValue * m_ObjectName;
 
 private:
-  InPlaceImageFilterSerializer( const Self & );
+  ObjectSerializer( const Self & );
   void operator=( const Self & ); // purposely not implemented
 };
 
 } // end namespace itk
-
-#ifndef ITK_MANUAL_INSTANTIATION
-#include "itkInPlaceImageFilterSerializer.hxx"
-#endif
 
 #endif

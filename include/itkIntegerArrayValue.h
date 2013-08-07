@@ -37,7 +37,7 @@ namespace itk
  *
  * \sa ParameterValue
  * */
-class ITK_EXPORT IntegerArrayValue: public ParameterValue
+class IntegerArrayValue: public ParameterValue
 {
 public:
   typedef itk::int64_t IntType;

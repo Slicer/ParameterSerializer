@@ -35,7 +35,7 @@ namespace itk
  *
  * \sa ParameterValue
  * */
-class ITK_EXPORT StringValue: public ParameterValue
+class StringValue: public ParameterValue
 {
 public:
   StringValue()
