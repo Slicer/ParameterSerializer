@@ -33,3 +33,4 @@ endmacro()
 set( TEMP ${PROJECT_BINARY_DIR}/Testing/Temporary )
 
 add_subdirectory( Filtering )
+add_subdirectory( Numerics )

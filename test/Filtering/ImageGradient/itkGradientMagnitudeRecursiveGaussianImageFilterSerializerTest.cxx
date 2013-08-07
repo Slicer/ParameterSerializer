@@ -26,7 +26,7 @@ limitations under the License.
 
 #include "itkGradientMagnitudeRecursiveGaussianImageFilter.h"
 
-int itkGradientMagnitudeRecursiveGaussionImageFilterSerializerTest( int argc, char * argv[] )
+int itkGradientMagnitudeRecursiveGaussianImageFilterSerializerTest( int argc, char * argv[] )
 {
   if( argc < 2 )
     {
