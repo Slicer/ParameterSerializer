@@ -30,7 +30,11 @@ set( ${PROJECT_NAME}_LIBRARIES "" CACHE INTERNAL
 
 add_subdirectory( include )
 
-include_directories( ${${PROJECT_NAME}_BUILD_INCLUDE_DIRS} )
+include_directories( include
+  "${${PROJECT_NAME}_BINARY_DIR}/include"
+  include/Core/Common
+  include/Filtering/ImageGradient
+  include/Numerics/Optimizers )
 add_subdirectory( src )
 
 include( CTest )
