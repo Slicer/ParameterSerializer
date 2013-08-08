@@ -35,7 +35,7 @@ namespace itk
  *
  * \sa ParameterValue
  * */
-class ITK_EXPORT FloatArrayValue: public ParameterValue
+class FloatArrayValue: public ParameterValue
 {
 public:
   typedef std::vector< float > FloatArrayType;

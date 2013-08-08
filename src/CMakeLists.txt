@@ -2,6 +2,7 @@ set( ${PROJECT_NAME}_SRCS
   itkJsonCppArchiver.cxx
   itkParameterArchiver.cxx
   itkParameterSerializer.cxx
+  Core/Common/itkObjectSerializer.cxx
   )
 
 add_library( ${PROJECT_NAME}Lib

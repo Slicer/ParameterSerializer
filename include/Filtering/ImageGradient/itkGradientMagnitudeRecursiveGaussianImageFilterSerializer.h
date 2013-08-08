@@ -36,7 +36,7 @@ namespace itk
  *
  */
 template< class TGradientMagnitudeRecursiveGaussianImageFilter >
-class ITK_EXPORT GradientMagnitudeRecursiveGaussianImageFilterSerializer:
+class GradientMagnitudeRecursiveGaussianImageFilterSerializer:
   public InPlaceImageFilterSerializer
     < typename TGradientMagnitudeRecursiveGaussianImageFilter::Superclass >
 {

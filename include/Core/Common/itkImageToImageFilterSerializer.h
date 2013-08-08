@@ -26,7 +26,7 @@ limitations under the License.
 #include "itkObjectFactory.h"
 
 #include "itkDoubleValue.h"
-#include "itkParameterSerializer.h"
+#include "itkObjectSerializer.h"
 
 namespace itk
 {
@@ -39,8 +39,8 @@ namespace itk
  *
  */
 template< class TImageToImageFilter >
-class ITK_EXPORT ImageToImageFilterSerializer:
-  public ParameterSerializer
+class ImageToImageFilterSerializer:
+  public ObjectSerializer
 {
 public:
   /** Standard class typedefs. */
@@ -53,7 +53,7 @@ public:
   itkNewMacro( Self );
 
   /** Run-time type information (and related methods). */
-  itkTypeMacro( ImageToImageFilterSerializer, ParameterSerializer );
+  itkTypeMacro( ImageToImageFilterSerializer, ObjectSerializer );
 
   typedef TImageToImageFilter ImageToImageFilterType;
 

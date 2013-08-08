@@ -20,61 +20,63 @@ See the License for the specific language governing permissions and
 limitations under the License.
 
 =========================================================================*/
-#ifndef __itkInPlaceImageFilterSerializer_h
-#define __itkInPlaceImageFilterSerializer_h
+#ifndef __itkGradientDescentOptimizerSerializer_h
+#define __itkGradientDescentOptimizerSerializer_h
 
-#include "itkImageToImageFilterSerializer.h"
+#include "itkObjectFactory.h"
+
+#include "itkBoolValue.h"
+#include "itkDoubleValue.h"
+#include "itkIntegerValue.h"
+#include "itkUnsignedIntegerValue.h"
+#include "itkObjectSerializer.h"
 
 namespace itk
 {
 
-/** \class InPlaceImageFilterSerializer
+/** \class GradientDescentOptimizerSerializer
  *
- * \brief Parameter serializer for InPlaceImageFilter.
+ * \brief Parameter serializer for GradientDescentOptimizer.
  *
- * \sa ParameterSerializer
+ * \sa GradientDescentOptimizer
  *
  */
-template< class TInPlaceImageFilter >
-class InPlaceImageFilterSerializer:
-  public ImageToImageFilterSerializer< typename TInPlaceImageFilter::Superclass >
+class GradientDescentOptimizerSerializer:
+  public ObjectSerializer
 {
 public:
   /** Standard class typedefs. */
-  typedef InPlaceImageFilterSerializer  Self;
-  typedef ImageToImageFilterSerializer
-    < typename TInPlaceImageFilter::Superclass >
-                                                        Superclass;
-  typedef SmartPointer< Self >                          Pointer;
-  typedef SmartPointer< const Self >                    ConstPointer;
+  typedef GradientDescentOptimizerSerializer Self;
+  typedef ParameterSerializer                Superclass;
+  typedef SmartPointer< Self >               Pointer;
+  typedef SmartPointer< const Self >         ConstPointer;
 
   /** Method for creation through the object factory. */
   itkNewMacro( Self );
 
   /** Run-time type information (and related methods). */
-  itkTypeMacro( InPlaceImageFilterSerializer,
-    ImageToImageFilterSerializer );
-
-  typedef TInPlaceImageFilter InPlaceImageFilterType;
+  itkTypeMacro( GradientDescentOptimizerSerializer, ObjectSerializer );
 
   virtual void Serialize();
   virtual void DeSerialize();
 
 protected:
-  InPlaceImageFilterSerializer();
-  virtual ~InPlaceImageFilterSerializer();
+  GradientDescentOptimizerSerializer();
+  virtual ~GradientDescentOptimizerSerializer();
 
-  BoolValue * m_InPlace;
+  BoolValue *            m_Maximize;
+  DoubleValue *          m_LearningRate;
+  UnsignedIntegerValue * m_NumberOfIterations;
 
 private:
-  InPlaceImageFilterSerializer( const Self & );
+  GradientDescentOptimizerSerializer( const Self & );
   void operator=( const Self & ); // purposely not implemented
 };
 
 } // end namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION
-#include "itkInPlaceImageFilterSerializer.hxx"
+#include "itkGradientDescentOptimizerSerializer.hxx"
 #endif
 
 #endif

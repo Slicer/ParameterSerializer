@@ -35,7 +35,7 @@ namespace itk
  *
  * \sa ParameterValue
  * */
-class ITK_EXPORT DoubleArrayValue: public ParameterValue
+class DoubleArrayValue: public ParameterValue
 {
 public:
   typedef std::vector< double > DoubleArrayType;

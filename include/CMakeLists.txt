@@ -22,3 +22,4 @@ endmacro()
 
 add_subdirectory( Core )
 add_subdirectory( Filtering )
+add_subdirectory( Numerics )

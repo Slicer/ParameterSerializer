@@ -20,13 +20,13 @@ See the License for the specific language governing permissions and
 limitations under the License.
 
 =========================================================================*/
-#include "itkGradientMagnitudeRecursiveGaussianImageFilterSerializer.h"
+#include "itkGradientDescentOptimizerSerializer.h"
 
 #include "itkJsonCppArchiver.h"
 
-#include "itkGradientMagnitudeRecursiveGaussianImageFilter.h"
+#include "itkGradientDescentOptimizer.h"
 
-int itkGradientMagnitudeRecursiveGaussionImageFilterSerializerTest( int argc, char * argv[] )
+int itkGradientDescentOptimizerSerializerTest( int argc, char * argv[] )
 {
   if( argc < 2 )
     {
@@ -37,25 +37,20 @@ int itkGradientMagnitudeRecursiveGaussionImageFilterSerializerTest( int argc, ch
     return EXIT_FAILURE;
     }
   const char * archiveFileName = argv[1];
-  // Types
-  static const unsigned int Dimension = 2;
 
-  typedef float                              PixelType;
-  typedef itk::Image< PixelType, Dimension > ImageType;
+  // Create an GradientDescentOptimizer
+  typedef itk::GradientDescentOptimizer GradientDescentOptimizerType;
+  GradientDescentOptimizerType::Pointer gradientDescentOptimizer =
+    GradientDescentOptimizerType::New();
 
-  // Create an GradientMagnitudeRecursiveGaussianImageFilter
-  typedef itk::GradientMagnitudeRecursiveGaussianImageFilter< ImageType, ImageType >
-    GradientMagnitudeRecursiveGaussianFilterType;
-  GradientMagnitudeRecursiveGaussianFilterType::Pointer acousticImpulseResponseFilter =
-    GradientMagnitudeRecursiveGaussianFilterType::New();
-
-  typedef itk::GradientMagnitudeRecursiveGaussianImageFilterSerializer<
-    GradientMagnitudeRecursiveGaussianFilterType >
-      SerializerType;
+  typedef itk::GradientDescentOptimizerSerializer SerializerType;
   SerializerType::Pointer serializer = SerializerType::New();
 
-  acousticImpulseResponseFilter->SetSigma( 0.8 );
-  serializer->SetTargetObject( acousticImpulseResponseFilter );
+  gradientDescentOptimizer->SetDebug( true );
+  gradientDescentOptimizer->SetMaximize( true );
+  gradientDescentOptimizer->SetLearningRate( 0.8 );
+  gradientDescentOptimizer->SetNumberOfIterations( 44 );
+  serializer->SetTargetObject( gradientDescentOptimizer );
   serializer->Serialize();
 
   std::cout << serializer << std::endl;
@@ -65,12 +60,16 @@ int itkGradientMagnitudeRecursiveGaussionImageFilterSerializerTest( int argc, ch
   archiver->WriteToFile( archiveFileName );
 
   archiver->ReadFromFile( archiveFileName );
-  acousticImpulseResponseFilter->SetSigma( 0.2 );
+  gradientDescentOptimizer->SetLearningRate( 0.2 );
+  gradientDescentOptimizer->SetNumberOfIterations( 99 );
   serializer->DeSerialize();
-  if( acousticImpulseResponseFilter->GetSigma() != 0.8 )
+  if( gradientDescentOptimizer->GetDebug() != true ||
+      gradientDescentOptimizer->GetMaximize() != true ||
+      gradientDescentOptimizer->GetLearningRate() != 0.8 ||
+      gradientDescentOptimizer->GetNumberOfIterations() != 44 )
     {
     std::cerr << "DeSerialization did not occur correctly: "
-      << acousticImpulseResponseFilter->GetSigma() << std::endl;
+      << gradientDescentOptimizer << std::endl;
     return EXIT_FAILURE;
     }
 
