@@ -50,6 +50,16 @@ int itkGradientDescentOptimizerSerializerTest( int argc, char * argv[] )
   gradientDescentOptimizer->SetMaximize( true );
   gradientDescentOptimizer->SetLearningRate( 0.8 );
   gradientDescentOptimizer->SetNumberOfIterations( 44 );
+  GradientDescentOptimizerType::ScalesType scales( 3 );
+  scales[0] = 33.3;
+  scales[1] = 45.3;
+  scales[2] = 98.4;
+  gradientDescentOptimizer->SetScales( scales );
+  GradientDescentOptimizerType::ParametersType initialPosition( 3 );
+  initialPosition[0] = 33.3;
+  initialPosition[1] = 45.3;
+  initialPosition[2] = 98.4;
+  gradientDescentOptimizer->SetInitialPosition( initialPosition );
   serializer->SetTargetObject( gradientDescentOptimizer );
   serializer->Serialize();
 
@@ -62,11 +72,17 @@ int itkGradientDescentOptimizerSerializerTest( int argc, char * argv[] )
   archiver->ReadFromFile( archiveFileName );
   gradientDescentOptimizer->SetLearningRate( 0.2 );
   gradientDescentOptimizer->SetNumberOfIterations( 99 );
+  scales[0] = -23.3;
+  scales[1] = -55.3;
+  scales[2] = -88.4;
+  gradientDescentOptimizer->SetScales( scales );
   serializer->DeSerialize();
   if( gradientDescentOptimizer->GetDebug() != true ||
       gradientDescentOptimizer->GetMaximize() != true ||
       gradientDescentOptimizer->GetLearningRate() != 0.8 ||
-      gradientDescentOptimizer->GetNumberOfIterations() != 44 )
+      gradientDescentOptimizer->GetNumberOfIterations() != 44 ||
+      gradientDescentOptimizer->GetScales()[0] != 33.3 ||
+      gradientDescentOptimizer->GetInitialPosition()[0] != 33.3 )
     {
     std::cerr << "DeSerialization did not occur correctly: "
       << gradientDescentOptimizer << std::endl;

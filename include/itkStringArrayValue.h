@@ -45,7 +45,12 @@ public:
     this->m_ValueType = STRING_ARRAY;
     }
 
-  StringArrayType GetValue() const
+  const StringArrayType & GetValue() const
+    {
+    return m_StringArray;
+    }
+
+  StringArrayType & GetModifiableValue()
     {
     return m_StringArray;
     }

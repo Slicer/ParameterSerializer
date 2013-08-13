@@ -47,7 +47,12 @@ public:
     this->m_ValueType = BOOL_ARRAY;
     }
 
-  BoolArrayType GetValue() const
+  const BoolArrayType & GetValue() const
+    {
+    return m_BoolArray;
+    }
+
+  BoolArrayType & GetModifiableValue()
     {
     return m_BoolArray;
     }

@@ -45,7 +45,12 @@ public:
     this->m_ValueType = DOUBLE_ARRAY;
     }
 
-  DoubleArrayType GetValue() const
+  const DoubleArrayType & GetValue() const
+    {
+    return m_DoubleArray;
+    }
+
+  DoubleArrayType & GetModifiableValue()
     {
     return m_DoubleArray;
     }
