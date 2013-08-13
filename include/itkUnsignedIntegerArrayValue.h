@@ -48,7 +48,12 @@ public:
     this->m_ValueType = UNSIGNED_INTEGER_ARRAY;
     }
 
-  UnsignedIntegerArrayType GetValue() const
+  const UnsignedIntegerArrayType & GetValue() const
+    {
+    return m_UnsignedIntegerArray;
+    }
+
+  UnsignedIntegerArrayType & GetModifiableValue()
     {
     return m_UnsignedIntegerArray;
     }

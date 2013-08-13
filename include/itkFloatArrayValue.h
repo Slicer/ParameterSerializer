@@ -45,7 +45,12 @@ public:
     this->m_ValueType = FLOAT_ARRAY;
     }
 
-  FloatArrayType GetValue() const
+  const FloatArrayType & GetValue() const
+    {
+    return m_FloatArray;
+    }
+
+  FloatArrayType & GetModifiableValue()
     {
     return m_FloatArray;
     }

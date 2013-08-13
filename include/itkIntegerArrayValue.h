@@ -48,7 +48,12 @@ public:
     this->m_ValueType = INTEGER_ARRAY;
     }
 
-  IntegerArrayType GetValue() const
+  const IntegerArrayType & GetValue() const
+    {
+    return m_IntegerArray;
+    }
+
+  IntegerArrayType & GetModifiableValue()
     {
     return m_IntegerArray;
     }
