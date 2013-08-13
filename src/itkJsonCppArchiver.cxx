@@ -458,7 +458,7 @@ JsonCppArchiver
             ParameterValue * value = parameters[*it];
             switch( value->GetValueType() )
               {
-              case ParameterValue::FLOAT:
+              case ParameterValue::FLOAT_ARRAY:
                 {
                 FloatArrayValue::FloatArrayType array( jsonValue.size() );
                 for( size_t ii = 0; ii < array.size(); ++ii )
@@ -470,7 +470,7 @@ JsonCppArchiver
                 arrayValue->SetValue( array );
                 break;
                 }
-              case ParameterValue::DOUBLE:
+              case ParameterValue::DOUBLE_ARRAY:
                 {
                 DoubleArrayValue::DoubleArrayType array( jsonValue.size() );
                 for( size_t ii = 0; ii < array.size(); ++ii )
