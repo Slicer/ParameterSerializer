@@ -20,63 +20,57 @@ See the License for the specific language governing permissions and
 limitations under the License.
 
 =========================================================================*/
-#ifndef __itkGradientDescentOptimizerSerializer_h
-#define __itkGradientDescentOptimizerSerializer_h
+#ifndef __itkOptimizerSerializer_h
+#define __itkOptimizerSerializer_h
 
 #include "itkObjectFactory.h"
 
-#include "itkBoolValue.h"
-#include "itkDoubleValue.h"
-#include "itkIntegerValue.h"
-#include "itkUnsignedIntegerValue.h"
-#include "itkOptimizerSerializer.h"
+#include "itkDoubleArrayValue.h"
+#include "itkObjectSerializer.h"
+
+#include "itkOptimizer.h"
 
 namespace itk
 {
 
-/** \class GradientDescentOptimizerSerializer
+/** \class OptimizerSerializer
  *
- * \brief Parameter serializer for GradientDescentOptimizer.
+ * \brief Parameter serializer for Optimizer.
  *
- * \sa GradientDescentOptimizer
+ * \sa Optimizer
  *
  */
-class GradientDescentOptimizerSerializer:
-  public OptimizerSerializer
+class OptimizerSerializer:
+  public ObjectSerializer
 {
 public:
   /** Standard class typedefs. */
-  typedef GradientDescentOptimizerSerializer Self;
-  typedef OptimizerSerializer                Superclass;
-  typedef SmartPointer< Self >               Pointer;
-  typedef SmartPointer< const Self >         ConstPointer;
+  typedef OptimizerSerializer        Self;
+  typedef ObjectSerializer           Superclass;
+  typedef SmartPointer< Self >       Pointer;
+  typedef SmartPointer< const Self > ConstPointer;
 
   /** Method for creation through the object factory. */
   itkNewMacro( Self );
 
   /** Run-time type information (and related methods). */
-  itkTypeMacro( GradientDescentOptimizerSerializer, OptimizerSerializer );
+  itkTypeMacro( OptimizerSerializer, ObjectSerializer );
 
   virtual void Serialize();
   virtual void DeSerialize();
 
 protected:
-  GradientDescentOptimizerSerializer();
-  virtual ~GradientDescentOptimizerSerializer();
+  OptimizerSerializer();
+  virtual ~OptimizerSerializer();
 
-  BoolValue *            m_Maximize;
-  DoubleValue *          m_LearningRate;
-  UnsignedIntegerValue * m_NumberOfIterations;
+  DoubleArrayValue * m_Scales;
+  DoubleArrayValue * m_InitialPosition;
 
 private:
-  GradientDescentOptimizerSerializer( const Self & );
+  OptimizerSerializer( const Self & );
   void operator=( const Self & ); // purposely not implemented
 };
 
 } // end namespace itk
-
-#ifndef ITK_MANUAL_INSTANTIATION
-#include "itkGradientDescentOptimizerSerializer.hxx"
-#endif
 
 #endif

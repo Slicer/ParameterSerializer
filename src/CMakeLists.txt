@@ -3,6 +3,7 @@ set( ${PROJECT_NAME}_SRCS
   itkParameterArchiver.cxx
   itkParameterSerializer.cxx
   Core/Common/itkObjectSerializer.cxx
+  Numerics/Optimizers/itkOptimizerSerializer.cxx
   )
 
 add_library( ${PROJECT_NAME}Lib
