@@ -7,7 +7,7 @@ set( CMAKE_MODULE_PATH ${${PROJECT_NAME}_SOURCE_DIR}/cmake ${CMAKE_MODULE_PATH} 
 find_package( ITK REQUIRED )
 include( ${ITK_USE_FILE} )
 
-if( DEFINED JsonCpp_DIR )
+if( EXISTS ${JsonCpp_DIR}/JsonCppConfig.cmake )
   # Use the more reliable JsonCppConfig.cmake.
   find_package( JsonCpp REQUIRED CONFIG )
 else()
