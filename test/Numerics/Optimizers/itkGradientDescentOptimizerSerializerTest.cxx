@@ -72,9 +72,9 @@ int itkGradientDescentOptimizerSerializerTest( int argc, char * argv[] )
   archiver->ReadFromFile( archiveFileName );
   gradientDescentOptimizer->SetLearningRate( 0.2 );
   gradientDescentOptimizer->SetNumberOfIterations( 99 );
-  scales[0] = -23.3;
-  scales[1] = -55.3;
-  scales[2] = -88.4;
+  scales[0] = 23.3;
+  scales[1] = 55.3;
+  scales[2] = 88.4;
   gradientDescentOptimizer->SetScales( scales );
   serializer->DeSerialize();
   if( gradientDescentOptimizer->GetDebug() != true ||
