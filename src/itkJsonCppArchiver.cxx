@@ -355,144 +355,129 @@ JsonCppArchiver
       ++it )
     {
     Json::Value & jsonValue = (*m_JsonValue)[*it];
-    switch( jsonValue.type() )
+    if( jsonValue.empty() )
       {
-      case Json::nullValue:
+      break;
+      }
+    ParametersType::const_iterator parameterValueIt = parameters.find( *it );
+    if( parameterValueIt == parameters.end() )
+      {
+      itkExceptionMacro("Did not find expected parameter: " << *it);
+      }
+    ParameterValue * parameterValue = parameterValueIt->second;
+    switch( parameterValue->GetValueType() )
+      {
+      case ParameterValue::NIL:
         {
         break;
         }
-      case Json::arrayValue:
+      case ParameterValue::PARAMETER_SERIALIZER_ARRAY:
         {
-        if( jsonValue.empty() )
-          {
-          break;
-          }
-        switch( jsonValue[0].type() )
-          {
-          case Json::nullValue:
-            break;
-          case Json::objectValue:
-            {
-            // The specific parent serializer *must* populate the ParameterSerializerArray
-            // with one of the correct inherited types.
-            ParameterSerializerArrayValue * serializerArrayValue =
-              static_cast< ParameterSerializerArrayValue * >( parameters[*it] );
-            const ParameterSerializerArrayValue::ParameterSerializerSmartArrayType &
-              oldSerializerArray = serializerArrayValue->GetValue();
-            itkAssertInDebugAndIgnoreInReleaseMacro( oldSerializerArray.size() > 0 );
-            LightObject::Pointer anotherSerializer = oldSerializerArray[0]->CreateAnother();
-            ParameterSerializer::Pointer serializer =
-              static_cast< ParameterSerializer * >( anotherSerializer.GetPointer() );
+        // The specific parent serializer *must* populate the ParameterSerializerArray
+        // with one of the correct inherited types.
+        ParameterSerializerArrayValue * serializerArrayValue =
+          static_cast< ParameterSerializerArrayValue * >( parameters[*it] );
+        const ParameterSerializerArrayValue::ParameterSerializerSmartArrayType &
+          oldSerializerArray = serializerArrayValue->GetValue();
+        itkAssertInDebugAndIgnoreInReleaseMacro( oldSerializerArray.size() > 0 );
+        LightObject::Pointer anotherSerializer = oldSerializerArray[0]->CreateAnother();
+        ParameterSerializer::Pointer serializer =
+          static_cast< ParameterSerializer * >( anotherSerializer.GetPointer() );
 
-            ParameterSerializerArrayValue::ParameterSerializerSmartArrayType
-              serializerArray( jsonValue.size() );
-            for( size_t ii = 0; ii < serializerArray.size(); ++ii )
-              {
-              serializerArray[ii] =
-                static_cast< ParameterSerializer * >( serializer->CreateAnother().GetPointer() );
-              JsonCppArchiver * archiver =
-                dynamic_cast< JsonCppArchiver * >( serializerArray[ii]->GetArchiver() );
-              if( archiver == NULL )
-                {
-                JsonCppArchiver::Pointer newNestedArchiver = JsonCppArchiver::New();
-                serializerArray[ii]->SetArchiver( newNestedArchiver );
-                archiver = newNestedArchiver.GetPointer();
-                }
-              archiver->SetJsonValue(
-                &(jsonValue[static_cast< Json::ArrayIndex >(ii)]) );
-              serializerArray[ii]->DeSerialize();
-              }
-            serializerArrayValue->SetValue( serializerArray );
-            break;
-            }
-          case Json::stringValue:
+        ParameterSerializerArrayValue::ParameterSerializerSmartArrayType
+          serializerArray( jsonValue.size() );
+        for( size_t ii = 0; ii < serializerArray.size(); ++ii )
+          {
+          serializerArray[ii] =
+            static_cast< ParameterSerializer * >( serializer->CreateAnother().GetPointer() );
+          JsonCppArchiver * archiver =
+            dynamic_cast< JsonCppArchiver * >( serializerArray[ii]->GetArchiver() );
+          if( archiver == NULL )
             {
-            StringArrayValue::StringArrayType array( jsonValue.size() );
-            for( size_t ii = 0; ii < array.size(); ++ii )
-              {
-              array[ii] = jsonValue[static_cast< Json::ArrayIndex >(ii)].asString();
-              }
-            StringArrayValue * arrayValue =
-              static_cast< StringArrayValue * >( parameters[*it] );
-            arrayValue->SetValue( array );
-            break;
+            JsonCppArchiver::Pointer newNestedArchiver = JsonCppArchiver::New();
+            serializerArray[ii]->SetArchiver( newNestedArchiver );
+            archiver = newNestedArchiver.GetPointer();
             }
-          case Json::booleanValue:
-            {
-            BoolArrayValue::BoolArrayType array( jsonValue.size() );
-            for( size_t ii = 0; ii < array.size(); ++ii )
-              {
-              array[ii] = jsonValue[static_cast< Json::ArrayIndex >(ii)].asBool();
-              }
-            BoolArrayValue * arrayValue =
-              static_cast< BoolArrayValue * >( parameters[*it] );
-            arrayValue->SetValue( array );
-            break;
-            }
-          case Json::intValue:
-            {
-            IntegerArrayValue::IntegerArrayType array( jsonValue.size() );
-            for( size_t ii = 0; ii < array.size(); ++ii )
-              {
-              array[ii] = jsonValue[static_cast< Json::ArrayIndex >(ii)].asInt64();
-              }
-            IntegerArrayValue * arrayValue =
-              static_cast< IntegerArrayValue * >( parameters[*it] );
-            arrayValue->SetValue( array );
-            break;
-            }
-          case Json::uintValue:
-            {
-            UnsignedIntegerArrayValue::UnsignedIntegerArrayType array( jsonValue.size() );
-            for( size_t ii = 0; ii < array.size(); ++ii )
-              {
-              array[ii] = jsonValue[static_cast< Json::ArrayIndex >(ii)].asUInt64();
-              }
-            UnsignedIntegerArrayValue * arrayValue =
-              static_cast< UnsignedIntegerArrayValue * >( parameters[*it] );
-            arrayValue->SetValue( array );
-            break;
-            }
-          case Json::realValue:
-            {
-            ParameterValue * value = parameters[*it];
-            switch( value->GetValueType() )
-              {
-              case ParameterValue::FLOAT_ARRAY:
-                {
-                FloatArrayValue::FloatArrayType array( jsonValue.size() );
-                for( size_t ii = 0; ii < array.size(); ++ii )
-                  {
-                  array[ii] = jsonValue[static_cast< Json::ArrayIndex >(ii)].asFloat();
-                  }
-                FloatArrayValue * arrayValue =
-                  static_cast< FloatArrayValue * >( parameters[*it] );
-                arrayValue->SetValue( array );
-                break;
-                }
-              case ParameterValue::DOUBLE_ARRAY:
-                {
-                DoubleArrayValue::DoubleArrayType array( jsonValue.size() );
-                for( size_t ii = 0; ii < array.size(); ++ii )
-                  {
-                  array[ii] = jsonValue[static_cast< Json::ArrayIndex >(ii)].asDouble();
-                  }
-                DoubleArrayValue * arrayValue =
-                  static_cast< DoubleArrayValue * >( parameters[*it] );
-                arrayValue->SetValue( array );
-                break;
-                }
-            default:
-              itkExceptionMacro("Invalid ParameterValueType");
-              }
-            break;
-            }
-          default:
-            itkExceptionMacro("Array value type not implemented (yet)");
+          archiver->SetJsonValue(
+            &(jsonValue[static_cast< Json::ArrayIndex >(ii)]) );
+          serializerArray[ii]->DeSerialize();
           }
+        serializerArrayValue->SetValue( serializerArray );
         break;
         }
-      case Json::objectValue:
+      case ParameterValue::STRING_ARRAY:
+        {
+        StringArrayValue::StringArrayType array( jsonValue.size() );
+        for( size_t ii = 0; ii < array.size(); ++ii )
+          {
+          array[ii] = jsonValue[static_cast< Json::ArrayIndex >(ii)].asString();
+          }
+        StringArrayValue * arrayValue =
+          static_cast< StringArrayValue * >( parameters[*it] );
+        arrayValue->SetValue( array );
+        break;
+        }
+      case ParameterValue::BOOL_ARRAY:
+        {
+        BoolArrayValue::BoolArrayType array( jsonValue.size() );
+        for( size_t ii = 0; ii < array.size(); ++ii )
+          {
+          array[ii] = jsonValue[static_cast< Json::ArrayIndex >(ii)].asBool();
+          }
+        BoolArrayValue * arrayValue =
+          static_cast< BoolArrayValue * >( parameters[*it] );
+        arrayValue->SetValue( array );
+        break;
+        }
+      case ParameterValue::INTEGER_ARRAY:
+        {
+        IntegerArrayValue::IntegerArrayType array( jsonValue.size() );
+        for( size_t ii = 0; ii < array.size(); ++ii )
+          {
+          array[ii] = jsonValue[static_cast< Json::ArrayIndex >(ii)].asInt64();
+          }
+        IntegerArrayValue * arrayValue =
+          static_cast< IntegerArrayValue * >( parameters[*it] );
+        arrayValue->SetValue( array );
+        break;
+        }
+      case ParameterValue::UNSIGNED_INTEGER_ARRAY:
+        {
+        UnsignedIntegerArrayValue::UnsignedIntegerArrayType array( jsonValue.size() );
+        for( size_t ii = 0; ii < array.size(); ++ii )
+          {
+          array[ii] = jsonValue[static_cast< Json::ArrayIndex >(ii)].asUInt64();
+          }
+        UnsignedIntegerArrayValue * arrayValue =
+          static_cast< UnsignedIntegerArrayValue * >( parameters[*it] );
+        arrayValue->SetValue( array );
+        break;
+        }
+      case ParameterValue::FLOAT_ARRAY:
+        {
+        FloatArrayValue::FloatArrayType array( jsonValue.size() );
+        for( size_t ii = 0; ii < array.size(); ++ii )
+          {
+          array[ii] = jsonValue[static_cast< Json::ArrayIndex >(ii)].asFloat();
+          }
+        FloatArrayValue * arrayValue =
+          static_cast< FloatArrayValue * >( parameters[*it] );
+        arrayValue->SetValue( array );
+        break;
+        }
+      case ParameterValue::DOUBLE_ARRAY:
+        {
+        DoubleArrayValue::DoubleArrayType array( jsonValue.size() );
+        for( size_t ii = 0; ii < array.size(); ++ii )
+          {
+          array[ii] = jsonValue[static_cast< Json::ArrayIndex >(ii)].asDouble();
+          }
+        DoubleArrayValue * arrayValue =
+          static_cast< DoubleArrayValue * >( parameters[*it] );
+        arrayValue->SetValue( array );
+        break;
+        }
+      case ParameterValue::PARAMETER_SERIALIZER:
         {
         ParameterSerializerValue * serializerValue =
           static_cast< ParameterSerializerValue * >( parameters[*it] );
@@ -509,56 +494,46 @@ JsonCppArchiver
         serializer->DeSerialize();
         break;
         }
-      case Json::stringValue:
+      case ParameterValue::STRING:
         {
         StringValue * value =
           static_cast< StringValue * >( parameters[*it] );
         value->SetValue( jsonValue.asString() );
         break;
         }
-      case Json::booleanValue:
+      case ParameterValue::BOOL:
         {
         BoolValue * value =
           static_cast< BoolValue * >( parameters[*it] );
         value->SetValue( jsonValue.asBool() );
         break;
         }
-      case Json::intValue:
+      case ParameterValue::INTEGER:
         {
         IntegerValue * value =
           static_cast< IntegerValue * >( parameters[*it] );
         value->SetValue( jsonValue.asInt() );
         break;
         }
-      case Json::uintValue:
+      case ParameterValue::UNSIGNED_INTEGER:
         {
         UnsignedIntegerValue * value =
           static_cast< UnsignedIntegerValue * >( parameters[*it] );
         value->SetValue( jsonValue.asUInt() );
         break;
         }
-      case Json::realValue:
+      case ParameterValue::FLOAT:
         {
-        ParameterValue * value = parameters[*it];
-        switch( value->GetValueType() )
-          {
-          case ParameterValue::FLOAT:
-            {
-            FloatValue * floatValue =
-              static_cast< FloatValue * >( value );
-            floatValue->SetValue( jsonValue.asFloat() );
-            break;
-            }
-          case ParameterValue::DOUBLE:
-            {
-            DoubleValue * doubleValue =
-              static_cast< DoubleValue * >( value );
-            doubleValue->SetValue( jsonValue.asDouble() );
-            break;
-              }
-          default:
-            itkExceptionMacro("Invalid ParameterValueType");
-          }
+        FloatValue * floatValue =
+          static_cast< FloatValue * >( parameters[*it] );
+        floatValue->SetValue( jsonValue.asFloat() );
+        break;
+        }
+      case ParameterValue::DOUBLE:
+        {
+        DoubleValue * doubleValue =
+          static_cast< DoubleValue * >( parameters[*it] );
+        doubleValue->SetValue( jsonValue.asDouble() );
         break;
         }
       default:
