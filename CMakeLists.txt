@@ -26,6 +26,21 @@ if( NOT CMAKE_ARCHIVE_OUTPUT_DIRECTORY )
   set( CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${${PROJECT_NAME}_BINARY_DIR}/lib )
 endif()
 
+if( UNIX )
+  set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-strict-aliasing"
+    CACHE STRING "Flags used by all build types." FORCE )
+  set( CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fno-strict-aliasing"
+    CACHE STRING "Flags used by all build types." FORCE )
+  if( ${CMAKE_SIZEOF_VOID_P} EQUAL 8 )
+    set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC"
+         CACHE STRING "Flags used by all build types." FORCE )
+    set( CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fPIC"
+         CACHE STRING "Flags used by all build types." FORCE )
+  endif( ${CMAKE_SIZEOF_VOID_P} EQUAL 8 )
+endif( UNIX )
+
+# Implementation agnostic fPIC
+set( CMAKE_POSITION_INDEPENDENT_CODE ON )
 
 # These will be populated by the subdirectory CMakeLists.txt.
 set( ${PROJECT_NAME}_BUILD_INCLUDE_DIRS "${${PROJECT_NAME}_BINARY_DIR}/include" CACHE INTERNAL
