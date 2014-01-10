@@ -22,16 +22,20 @@
 ##############################################################################
 
 if( JsonCpp_DIR )
-  set( JsonCpp_INCLUDEDIR ${JsonCpp_DIR}/include )
-  set( JsonCpp_LIBDIR ${JsonCpp_DIR}/lib )
+  if( EXISTS ${JsonCpp_DIR}/CMakeCache.txt )
+    file( STRINGS ${JsonCpp_DIR}/CMakeCache.txt _source_dir_def REGEX "jsoncpp_SOURCE_DIR" )
+    string( REGEX REPLACE "[^=]+[=]" "" _source_dir "${_source_dir_def}" )
+    set( _jsoncpp_include_dir "${_source_dir}/include" )
+  endif()
+  set( _jsoncpp_library ${JsonCpp_DIR}/lib )
 endif( JsonCpp_DIR )
 
 find_path( JsonCpp_INCLUDE_DIR NAMES json/json.h
-  HINTS ${JsonCpp_INCLUDEDIR}
+  HINTS ${_jsoncpp_include_dir}
   PATH_SUFFIXES jsoncpp )
 
 find_library( JsonCpp_LIBRARY NAMES jsoncpp libjsoncpp
-  HINTS ${JsonCpp_LIBDIR} )
+  HINTS ${_jsoncpp_library} )
 
 set( JsonCpp_INCLUDE_DIRS ${JsonCpp_INCLUDE_DIR} )
 set( JsonCpp_LIBRARIES ${JsonCpp_LIBRARY} )
