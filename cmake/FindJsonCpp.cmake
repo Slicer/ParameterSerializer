@@ -1,8 +1,8 @@
 ##############################################################################
 #
-# Library:   TubeTK
+# Initially developed for:   TubeTK
 #
-# Copyright 2010 Kitware Inc. 28 Corporate Drive,
+# Copyright 2013 Kitware Inc. 28 Corporate Drive,
 # Clifton Park, NY, 12065, USA.
 #
 # All rights reserved.
@@ -27,7 +27,11 @@ if( JsonCpp_DIR )
     string( REGEX REPLACE "[^=]+[=]" "" _source_dir "${_source_dir_def}" )
     set( _jsoncpp_include_dir "${_source_dir}/include" )
   endif()
-  set( _jsoncpp_library ${JsonCpp_DIR}/lib )
+  set( _jsoncpp_library ${JsonCpp_DIR}/lib
+    ${JsonCpp_DIR}/lib/Release
+    ${JsonCpp_DIR}/lib/MinSizeRel
+    ${JsonCpp_DIR}/lib/RelWithDebInfo
+    ${JsonCpp_DIR}/lib/Debug )
 endif( JsonCpp_DIR )
 
 find_path( JsonCpp_INCLUDE_DIR NAMES json/json.h
