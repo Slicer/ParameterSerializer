@@ -1,5 +1,5 @@
-TubeTK ParameterSerializer
-==========================
+ParameterSerializer
+===================
 
 [![Build Status](https://travis-ci.org/TubeTK/TubeTK-ParameterSerializer.png?branch=master)](https://travis-ci.org/TubeTK/TubeTK-ParameterSerializer)
 
