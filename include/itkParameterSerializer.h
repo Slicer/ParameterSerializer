@@ -98,7 +98,7 @@ protected:
   ParameterSerializer();
   virtual ~ParameterSerializer();
 
-  void PrintSelf( std::ostream & os, Indent indent ) const;
+  void PrintSelf( std::ostream & os, Indent indent ) const ITK_OVERRIDE;
 
   ParametersType m_Parameters;
 
