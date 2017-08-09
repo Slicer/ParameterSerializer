@@ -55,8 +55,8 @@ public:
   /** Run-time type information (and related methods). */
   itkTypeMacro( ObjectSerializer, ParameterSerializer );
 
-  virtual void Serialize();
-  virtual void DeSerialize();
+  virtual void Serialize() ITK_OVERRIDE;
+  virtual void DeSerialize() ITK_OVERRIDE;
 
 protected:
   ObjectSerializer();
