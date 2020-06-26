@@ -10,8 +10,9 @@ get_filename_component( ParameterSerializer_CMAKE_DIR "${CMAKE_CURRENT_LIST_FILE
 
 set( ParameterSerializer_INCLUDE_DIRS "@ParameterSerializer_INCLUDE_DIRS@" )
 
-find_package(ITK REQUIRED)
-set(ITK_FOUND FALSE)
+set(ITK_DIR "@ITK_DIR@")
+include(CMakeFindDependencyMacro)
+find_dependency(ITK REQUIRED)
 
 # We need to let CMake know the location of the json library.
 set( used_jsoncpp_config "@JsonCpp_DIR@/JsonCppConfig.cmake" )
