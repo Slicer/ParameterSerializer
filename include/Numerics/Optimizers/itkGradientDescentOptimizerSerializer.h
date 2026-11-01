@@ -55,7 +55,7 @@ public:
   itkNewMacro( Self );
 
   /** Run-time type information (and related methods). */
-  itkTypeMacro( GradientDescentOptimizerSerializer, OptimizerSerializer );
+  itkOverrideGetNameOfClassMacro( GradientDescentOptimizerSerializer );
 
   virtual void Serialize();
   virtual void DeSerialize();

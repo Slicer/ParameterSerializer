@@ -49,7 +49,7 @@ public:
   typedef SmartPointer< const Self > ConstPointer;
 
   /** Run-time type information (and related methods). */
-  itkTypeMacro( JsonCppArchiver, ParameterArchiver );
+  itkOverrideGetNameOfClassMacro( JsonCppArchiver );
 
   itkNewMacro( Self );
 

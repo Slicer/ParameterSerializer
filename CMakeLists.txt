@@ -13,8 +13,13 @@ set( CMAKE_CXX_EXTENSIONS OFF )
 
 set( CMAKE_MODULE_PATH ${${PROJECT_NAME}_SOURCE_DIR}/cmake ${CMAKE_MODULE_PATH} )
 
-find_package( ITK REQUIRED )
-include( ${ITK_USE_FILE} )
+find_package( ITK 5.4 REQUIRED )
+if( ITK_INTERFACE_LIBRARIES )
+  set( ${PROJECT_NAME}_ITK_LIBRARIES ${ITK_INTERFACE_LIBRARIES} )
+else()
+  include( ${ITK_USE_FILE} )
+  set( ${PROJECT_NAME}_ITK_LIBRARIES ${ITK_LIBRARIES} )
+endif()
 
 if( EXISTS ${JsonCpp_DIR}/JsonCppConfig.cmake )
   # Use the more reliable JsonCppConfig.cmake.

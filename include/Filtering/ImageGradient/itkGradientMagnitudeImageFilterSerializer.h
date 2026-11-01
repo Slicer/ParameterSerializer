@@ -53,8 +53,7 @@ public:
   itkNewMacro( Self );
 
   /** Run-time type information (and related methods). */
-  itkTypeMacro( GradientMagnitudeImageFilterSerializer,
-    ImageToImageFilterSerializer );
+  itkOverrideGetNameOfClassMacro( GradientMagnitudeImageFilterSerializer );
 
   typedef TGradientMagnitudeImageFilter GradientMagnitudeImageFilterType;
 

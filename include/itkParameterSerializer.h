@@ -69,7 +69,7 @@ public:
   typedef SmartPointer< const Self > ConstPointer;
 
   /** Run-time type information (and related methods). */
-  itkTypeMacro( ParameterSerializer, Object );
+  itkOverrideGetNameOfClassMacro( ParameterSerializer );
 
   /** Standard New macro. */
   itkNewMacro( Self );
@@ -81,12 +81,12 @@ public:
 
   /** Set/Get the archiver.  The default Archiver is a JsonCpp archiver. */
   itkSetObjectMacro( Archiver, ArchiverType );
-  itkGetObjectMacro( Archiver, ArchiverType );
+  virtual ArchiverType * GetArchiver() { return this->m_Archiver.GetPointer(); }
 
   /** Set/Get the target object whose parameters this class is
    * serializing/deserializing. */
   itkSetObjectMacro( TargetObject, LightObject );
-  itkGetObjectMacro( TargetObject, LightObject );
+  virtual LightObject * GetTargetObject() { return this->m_TargetObject.GetPointer(); }
 
   /** Serialize the parameters to the archive. */
   virtual void Serialize();
