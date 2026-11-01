@@ -1,6 +1,15 @@
-cmake_minimum_required( VERSION 2.8.7 )
+cmake_minimum_required( VERSION 3.16.3 )
 
 project( ParameterSerializer )
+
+if( NOT CMAKE_CXX_STANDARD )
+  set( CMAKE_CXX_STANDARD 17 )
+endif()
+if( NOT CMAKE_CXX_STANDARD MATCHES "^(17|20|23)$" )
+  message( FATAL_ERROR "CMAKE_CXX_STANDARD must be set to 17, 20, or 23" )
+endif()
+set( CMAKE_CXX_STANDARD_REQUIRED ON )
+set( CMAKE_CXX_EXTENSIONS OFF )
 
 set( CMAKE_MODULE_PATH ${${PROJECT_NAME}_SOURCE_DIR}/cmake ${CMAKE_MODULE_PATH} )
 
