@@ -52,8 +52,7 @@ public:
   itkNewMacro( Self );
 
   /** Run-time type information (and related methods). */
-  itkTypeMacro( InPlaceImageFilterSerializer,
-    ImageToImageFilterSerializer );
+  itkOverrideGetNameOfClassMacro( InPlaceImageFilterSerializer );
 
   typedef TInPlaceImageFilter InPlaceImageFilterType;
 

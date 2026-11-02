@@ -53,10 +53,10 @@ public:
   itkNewMacro( Self );
 
   /** Run-time type information (and related methods). */
-  itkTypeMacro( ObjectSerializer, ParameterSerializer );
+  itkOverrideGetNameOfClassMacro( ObjectSerializer );
 
-  virtual void Serialize() ITK_OVERRIDE;
-  virtual void DeSerialize() ITK_OVERRIDE;
+  virtual void Serialize() override;
+  virtual void DeSerialize() override;
 
 protected:
   ObjectSerializer();

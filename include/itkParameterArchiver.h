@@ -81,7 +81,7 @@ public:
   typedef SmartPointer< const Self > ConstPointer;
 
   /** Run-time type information (and related methods). */
-  itkTypeMacro( ParameterArchiver, Object );
+  itkOverrideGetNameOfClassMacro( ParameterArchiver );
 
   /** This type is intentionally protected.  Only classes that inherit from
    * ParameterSerializer will deal with m_Parameters. */

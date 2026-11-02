@@ -49,7 +49,7 @@ public:
   typedef SmartPointer< const Self > ConstPointer;
 
   /** Run-time type information (and related methods). */
-  itkTypeMacro( JsonCppArchiver, ParameterArchiver );
+  itkOverrideGetNameOfClassMacro( JsonCppArchiver );
 
   itkNewMacro( Self );
 
@@ -57,47 +57,47 @@ public:
   void SetJsonValue( Json::Value * value );
   const Json::Value * GetJsonValue() const;
 
-  virtual void ReadFromFile( const std::string & fileName ) ITK_OVERRIDE;
-  virtual void WriteToFile( const std::string & fileName ) const ITK_OVERRIDE;
+  virtual void ReadFromFile( const std::string & fileName ) override;
+  virtual void WriteToFile( const std::string & fileName ) const override;
 
-  virtual void ReadFromStdStream( std::istream & stream ) ITK_OVERRIDE;
-  virtual void WriteToStdStream( std::ostream & stream ) const ITK_OVERRIDE;
+  virtual void ReadFromStdStream( std::istream & stream ) override;
+  virtual void WriteToStdStream( std::ostream & stream ) const override;
 
 protected:
   JsonCppArchiver();
   virtual ~JsonCppArchiver();
 
-  virtual void Serialize( const std::string & name ) ITK_OVERRIDE;
+  virtual void Serialize( const std::string & name ) override;
   virtual void Serialize( const std::string & name,
-    const ParameterSerializerValue * value ) ITK_OVERRIDE;
+    const ParameterSerializerValue * value ) override;
   virtual void Serialize( const std::string & name,
-    const ParameterSerializerArrayValue * value ) ITK_OVERRIDE;
+    const ParameterSerializerArrayValue * value ) override;
   virtual void Serialize( const std::string & name,
-    const StringValue * value ) ITK_OVERRIDE;
+    const StringValue * value ) override;
   virtual void Serialize( const std::string & name,
-    const StringArrayValue * value ) ITK_OVERRIDE;
+    const StringArrayValue * value ) override;
   virtual void Serialize( const std::string & name,
-    const BoolValue * value ) ITK_OVERRIDE;
+    const BoolValue * value ) override;
   virtual void Serialize( const std::string & name,
-    const BoolArrayValue * value ) ITK_OVERRIDE;
+    const BoolArrayValue * value ) override;
   virtual void Serialize( const std::string & name,
-    const IntegerValue * value ) ITK_OVERRIDE;
+    const IntegerValue * value ) override;
   virtual void Serialize( const std::string & name,
-    const IntegerArrayValue * value ) ITK_OVERRIDE;
+    const IntegerArrayValue * value ) override;
   virtual void Serialize( const std::string & name,
-    const UnsignedIntegerValue * value ) ITK_OVERRIDE;
+    const UnsignedIntegerValue * value ) override;
   virtual void Serialize( const std::string & name,
-    const UnsignedIntegerArrayValue * value ) ITK_OVERRIDE;
+    const UnsignedIntegerArrayValue * value ) override;
   virtual void Serialize( const std::string & name,
-    const FloatValue * value ) ITK_OVERRIDE;
+    const FloatValue * value ) override;
   virtual void Serialize( const std::string & name,
-    const FloatArrayValue * value ) ITK_OVERRIDE;
+    const FloatArrayValue * value ) override;
   virtual void Serialize( const std::string & name,
-    const DoubleValue * value ) ITK_OVERRIDE;
+    const DoubleValue * value ) override;
   virtual void Serialize( const std::string & name,
-    const DoubleArrayValue * value ) ITK_OVERRIDE;
+    const DoubleArrayValue * value ) override;
 
-  virtual void DeSerialize( ParametersType & parameters ) ITK_OVERRIDE;
+  virtual void DeSerialize( ParametersType & parameters ) override;
 
 private:
   JsonCppArchiver( const Self & ); // purposely not implemented

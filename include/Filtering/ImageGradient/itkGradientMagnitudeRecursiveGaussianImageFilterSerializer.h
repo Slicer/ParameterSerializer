@@ -54,8 +54,7 @@ public:
   itkNewMacro( Self );
 
   /** Run-time type information (and related methods). */
-  itkTypeMacro( GradientMagnitudeRecursiveGaussianImageFilterSerializer,
-    InPlaceImageFilterSerializer );
+  itkOverrideGetNameOfClassMacro( GradientMagnitudeRecursiveGaussianImageFilterSerializer );
 
   typedef TGradientMagnitudeRecursiveGaussianImageFilter
     GradientMagnitudeRecursiveGaussianImageFilterType;

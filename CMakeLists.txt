@@ -1,11 +1,25 @@
-cmake_minimum_required( VERSION 2.8.7 )
+cmake_minimum_required( VERSION 3.16.3 )
 
 project( ParameterSerializer )
 
+if( NOT CMAKE_CXX_STANDARD )
+  set( CMAKE_CXX_STANDARD 17 )
+endif()
+if( NOT CMAKE_CXX_STANDARD MATCHES "^(17|20|23)$" )
+  message( FATAL_ERROR "CMAKE_CXX_STANDARD must be set to 17, 20, or 23" )
+endif()
+set( CMAKE_CXX_STANDARD_REQUIRED ON )
+set( CMAKE_CXX_EXTENSIONS OFF )
+
 set( CMAKE_MODULE_PATH ${${PROJECT_NAME}_SOURCE_DIR}/cmake ${CMAKE_MODULE_PATH} )
 
-find_package( ITK REQUIRED )
-include( ${ITK_USE_FILE} )
+find_package( ITK 5.4 REQUIRED )
+if( ITK_INTERFACE_LIBRARIES )
+  set( ${PROJECT_NAME}_ITK_LIBRARIES ${ITK_INTERFACE_LIBRARIES} )
+else()
+  include( ${ITK_USE_FILE} )
+  set( ${PROJECT_NAME}_ITK_LIBRARIES ${ITK_LIBRARIES} )
+endif()
 
 if( EXISTS ${JsonCpp_DIR}/JsonCppConfig.cmake )
   # Use the more reliable JsonCppConfig.cmake.
